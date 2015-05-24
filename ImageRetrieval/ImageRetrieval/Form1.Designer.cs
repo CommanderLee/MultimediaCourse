@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageTraining = new System.Windows.Forms.TabPage();
             this.panelTrainOther = new System.Windows.Forms.Panel();
@@ -46,6 +47,21 @@
             this.tabPageTesting = new System.Windows.Forms.TabPage();
             this.panelShowQueryList = new System.Windows.Forms.Panel();
             this.labelShowQueryList = new System.Windows.Forms.Label();
+            this.panelTestButtons = new System.Windows.Forms.Panel();
+            this.labelReturnImgNum = new System.Windows.Forms.Label();
+            this.buttonPreProcess = new System.Windows.Forms.Button();
+            this.textBoxReturnImgNum = new System.Windows.Forms.TextBox();
+            this.buttonTest = new System.Windows.Forms.Button();
+            this.labelTestResult = new System.Windows.Forms.Label();
+            this.panelShowImg = new System.Windows.Forms.Panel();
+            this.pictureBoxShowImg = new System.Windows.Forms.PictureBox();
+            this.buttonThumbnailImg = new System.Windows.Forms.Button();
+            this.buttonOriginalImg = new System.Windows.Forms.Button();
+            this.buttonImgBackward = new System.Windows.Forms.Button();
+            this.buttonImgForward = new System.Windows.Forms.Button();
+            this.buttonTestBackward = new System.Windows.Forms.Button();
+            this.buttonTestForward = new System.Windows.Forms.Button();
+            this.textBoxTestNum = new System.Windows.Forms.TextBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageTraining.SuspendLayout();
             this.panelTrainOther.SuspendLayout();
@@ -53,7 +69,11 @@
             this.panelTrainImgList.SuspendLayout();
             this.panelShowImgList.SuspendLayout();
             this.panelTrainDataset.SuspendLayout();
+            this.tabPageTesting.SuspendLayout();
             this.panelShowQueryList.SuspendLayout();
+            this.panelTestButtons.SuspendLayout();
+            this.panelShowImg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShowImg)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -236,6 +256,8 @@
             // 
             // tabPageTesting
             // 
+            this.tabPageTesting.Controls.Add(this.panelShowImg);
+            this.tabPageTesting.Controls.Add(this.panelTestButtons);
             this.tabPageTesting.Location = new System.Drawing.Point(4, 34);
             this.tabPageTesting.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageTesting.Name = "tabPageTesting";
@@ -266,6 +288,191 @@
             this.labelShowQueryList.Size = new System.Drawing.Size(340, 480);
             this.labelShowQueryList.TabIndex = 3;
             // 
+            // panelTestButtons
+            // 
+            this.panelTestButtons.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panelTestButtons.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelTestButtons.Controls.Add(this.textBoxTestNum);
+            this.panelTestButtons.Controls.Add(this.buttonTestForward);
+            this.panelTestButtons.Controls.Add(this.buttonTestBackward);
+            this.panelTestButtons.Controls.Add(this.buttonImgForward);
+            this.panelTestButtons.Controls.Add(this.buttonImgBackward);
+            this.panelTestButtons.Controls.Add(this.buttonOriginalImg);
+            this.panelTestButtons.Controls.Add(this.buttonThumbnailImg);
+            this.panelTestButtons.Controls.Add(this.labelTestResult);
+            this.panelTestButtons.Controls.Add(this.buttonTest);
+            this.panelTestButtons.Controls.Add(this.textBoxReturnImgNum);
+            this.panelTestButtons.Controls.Add(this.labelReturnImgNum);
+            this.panelTestButtons.Controls.Add(this.buttonPreProcess);
+            this.panelTestButtons.Location = new System.Drawing.Point(10, 10);
+            this.panelTestButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.panelTestButtons.Name = "panelTestButtons";
+            this.panelTestButtons.Size = new System.Drawing.Size(375, 770);
+            this.panelTestButtons.TabIndex = 1;
+            // 
+            // labelReturnImgNum
+            // 
+            this.labelReturnImgNum.BackColor = System.Drawing.Color.Lavender;
+            this.labelReturnImgNum.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelReturnImgNum.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReturnImgNum.Location = new System.Drawing.Point(10, 80);
+            this.labelReturnImgNum.Name = "labelReturnImgNum";
+            this.labelReturnImgNum.Size = new System.Drawing.Size(350, 50);
+            this.labelReturnImgNum.TabIndex = 1;
+            this.labelReturnImgNum.Text = "Return                    images.";
+            // 
+            // buttonPreProcess
+            // 
+            this.buttonPreProcess.BackColor = System.Drawing.Color.LightCyan;
+            this.buttonPreProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonPreProcess.Location = new System.Drawing.Point(10, 10);
+            this.buttonPreProcess.Name = "buttonPreProcess";
+            this.buttonPreProcess.Size = new System.Drawing.Size(350, 50);
+            this.buttonPreProcess.TabIndex = 0;
+            this.buttonPreProcess.Text = "Pre-Process";
+            this.buttonPreProcess.UseVisualStyleBackColor = false;
+            this.buttonPreProcess.Click += new System.EventHandler(this.buttonPreProcess_Click);
+            // 
+            // textBoxReturnImgNum
+            // 
+            this.textBoxReturnImgNum.Location = new System.Drawing.Point(103, 86);
+            this.textBoxReturnImgNum.Name = "textBoxReturnImgNum";
+            this.textBoxReturnImgNum.Size = new System.Drawing.Size(100, 30);
+            this.textBoxReturnImgNum.TabIndex = 2;
+            this.textBoxReturnImgNum.Text = "30";
+            this.textBoxReturnImgNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // buttonTest
+            // 
+            this.buttonTest.BackColor = System.Drawing.Color.LightCyan;
+            this.buttonTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonTest.Location = new System.Drawing.Point(60, 150);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(170, 50);
+            this.buttonTest.TabIndex = 3;
+            this.buttonTest.Text = "Test No.";
+            this.buttonTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonTest.UseVisualStyleBackColor = false;
+            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
+            // 
+            // labelTestResult
+            // 
+            this.labelTestResult.BackColor = System.Drawing.Color.Lavender;
+            this.labelTestResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelTestResult.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTestResult.Location = new System.Drawing.Point(10, 220);
+            this.labelTestResult.Name = "labelTestResult";
+            this.labelTestResult.Size = new System.Drawing.Size(350, 150);
+            this.labelTestResult.TabIndex = 4;
+            // 
+            // panelShowImg
+            // 
+            this.panelShowImg.AutoScroll = true;
+            this.panelShowImg.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panelShowImg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelShowImg.Controls.Add(this.pictureBoxShowImg);
+            this.panelShowImg.Location = new System.Drawing.Point(395, 10);
+            this.panelShowImg.Margin = new System.Windows.Forms.Padding(4);
+            this.panelShowImg.Name = "panelShowImg";
+            this.panelShowImg.Size = new System.Drawing.Size(1140, 770);
+            this.panelShowImg.TabIndex = 2;
+            // 
+            // pictureBoxShowImg
+            // 
+            this.pictureBoxShowImg.Location = new System.Drawing.Point(10, 10);
+            this.pictureBoxShowImg.Name = "pictureBoxShowImg";
+            this.pictureBoxShowImg.Size = new System.Drawing.Size(1100, 730);
+            this.pictureBoxShowImg.TabIndex = 0;
+            this.pictureBoxShowImg.TabStop = false;
+            // 
+            // buttonThumbnailImg
+            // 
+            this.buttonThumbnailImg.BackColor = System.Drawing.Color.LightCyan;
+            this.buttonThumbnailImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonThumbnailImg.Location = new System.Drawing.Point(10, 390);
+            this.buttonThumbnailImg.Name = "buttonThumbnailImg";
+            this.buttonThumbnailImg.Size = new System.Drawing.Size(350, 50);
+            this.buttonThumbnailImg.TabIndex = 5;
+            this.buttonThumbnailImg.Text = "Show Thumbnail Image";
+            this.buttonThumbnailImg.UseVisualStyleBackColor = false;
+            this.buttonThumbnailImg.Click += new System.EventHandler(this.buttonThumbnail_Click);
+            // 
+            // buttonOriginalImg
+            // 
+            this.buttonOriginalImg.BackColor = System.Drawing.Color.LightCyan;
+            this.buttonOriginalImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonOriginalImg.Location = new System.Drawing.Point(60, 460);
+            this.buttonOriginalImg.Name = "buttonOriginalImg";
+            this.buttonOriginalImg.Size = new System.Drawing.Size(250, 50);
+            this.buttonOriginalImg.TabIndex = 6;
+            this.buttonOriginalImg.Text = "Show Original Image";
+            this.buttonOriginalImg.UseVisualStyleBackColor = false;
+            this.buttonOriginalImg.Click += new System.EventHandler(this.buttonOriginalImg_Click);
+            // 
+            // buttonImgBackward
+            // 
+            this.buttonImgBackward.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonImgBackward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonImgBackward.BackgroundImage")));
+            this.buttonImgBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonImgBackward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonImgBackward.Location = new System.Drawing.Point(10, 460);
+            this.buttonImgBackward.Name = "buttonImgBackward";
+            this.buttonImgBackward.Size = new System.Drawing.Size(50, 50);
+            this.buttonImgBackward.TabIndex = 7;
+            this.buttonImgBackward.UseVisualStyleBackColor = false;
+            this.buttonImgBackward.Click += new System.EventHandler(this.buttonImgBackward_Click);
+            // 
+            // buttonImgForward
+            // 
+            this.buttonImgForward.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonImgForward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonImgForward.BackgroundImage")));
+            this.buttonImgForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonImgForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonImgForward.Location = new System.Drawing.Point(310, 460);
+            this.buttonImgForward.Name = "buttonImgForward";
+            this.buttonImgForward.Size = new System.Drawing.Size(50, 50);
+            this.buttonImgForward.TabIndex = 8;
+            this.buttonImgForward.UseVisualStyleBackColor = false;
+            this.buttonImgForward.Click += new System.EventHandler(this.buttonImgForward_Click);
+            // 
+            // buttonTestBackward
+            // 
+            this.buttonTestBackward.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonTestBackward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonTestBackward.BackgroundImage")));
+            this.buttonTestBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonTestBackward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonTestBackward.Location = new System.Drawing.Point(10, 150);
+            this.buttonTestBackward.Name = "buttonTestBackward";
+            this.buttonTestBackward.Size = new System.Drawing.Size(50, 50);
+            this.buttonTestBackward.TabIndex = 9;
+            this.buttonTestBackward.UseVisualStyleBackColor = false;
+            this.buttonTestBackward.Click += new System.EventHandler(this.buttonTestBackward_Click);
+            // 
+            // buttonTestForward
+            // 
+            this.buttonTestForward.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonTestForward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonTestForward.BackgroundImage")));
+            this.buttonTestForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonTestForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonTestForward.Location = new System.Drawing.Point(310, 150);
+            this.buttonTestForward.Name = "buttonTestForward";
+            this.buttonTestForward.Size = new System.Drawing.Size(50, 50);
+            this.buttonTestForward.TabIndex = 10;
+            this.buttonTestForward.UseVisualStyleBackColor = false;
+            this.buttonTestForward.Click += new System.EventHandler(this.buttonTestForward_Click);
+            // 
+            // textBoxTestNum
+            // 
+            this.textBoxTestNum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTestNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxTestNum.Location = new System.Drawing.Point(230, 159);
+            this.textBoxTestNum.Name = "textBoxTestNum";
+            this.textBoxTestNum.Size = new System.Drawing.Size(80, 35);
+            this.textBoxTestNum.TabIndex = 11;
+            this.textBoxTestNum.Text = "30";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -285,8 +492,13 @@
             this.panelShowImgList.ResumeLayout(false);
             this.panelShowImgList.PerformLayout();
             this.panelTrainDataset.ResumeLayout(false);
+            this.tabPageTesting.ResumeLayout(false);
             this.panelShowQueryList.ResumeLayout(false);
             this.panelShowQueryList.PerformLayout();
+            this.panelTestButtons.ResumeLayout(false);
+            this.panelTestButtons.PerformLayout();
+            this.panelShowImg.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShowImg)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -311,6 +523,21 @@
         private System.Windows.Forms.Panel panelShowImgList;
         private System.Windows.Forms.Panel panelShowQueryList;
         private System.Windows.Forms.Label labelShowQueryList;
+        private System.Windows.Forms.Panel panelTestButtons;
+        private System.Windows.Forms.Label labelReturnImgNum;
+        private System.Windows.Forms.Button buttonPreProcess;
+        private System.Windows.Forms.TextBox textBoxReturnImgNum;
+        private System.Windows.Forms.Button buttonTest;
+        private System.Windows.Forms.Label labelTestResult;
+        private System.Windows.Forms.Panel panelShowImg;
+        private System.Windows.Forms.PictureBox pictureBoxShowImg;
+        private System.Windows.Forms.Button buttonThumbnailImg;
+        private System.Windows.Forms.Button buttonOriginalImg;
+        private System.Windows.Forms.Button buttonImgBackward;
+        private System.Windows.Forms.Button buttonImgForward;
+        private System.Windows.Forms.Button buttonTestBackward;
+        private System.Windows.Forms.Button buttonTestForward;
+        private System.Windows.Forms.TextBox textBoxTestNum;
     }
 }
 

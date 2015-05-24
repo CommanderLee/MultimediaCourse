@@ -12,8 +12,13 @@ namespace ImageRetrieval
 {
     public partial class FormMain : Form
     {
+        /** Tab 1: Training **/
+
         string      datasetFolder;
         string[]    imgNames, queryNames;
+
+        /** Tab 2: Testing **/
+
 
         public FormMain()
         {
@@ -77,5 +82,48 @@ namespace ImageRetrieval
         {
 
         }
+
+        /** Tab 2: Testing **/
+
+        private void buttonPreProcess_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTestBackward_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTestForward_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonThumbnail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonOriginalImg_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonImgBackward_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonImgForward_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
