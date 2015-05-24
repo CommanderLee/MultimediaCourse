@@ -14,11 +14,14 @@ namespace ImageRetrieval
     {
         /** Tab 1: Training **/
 
-        string      datasetFolder;
-        string[]    imgNames, queryNames;
+        string          datasetFolder;
+        string[]        imgNames, queryNames;
+
+        const string    defaultFileName = "defaultFile.txt";
 
         /** Tab 2: Testing **/
 
+        List<MyImage>   myImages;
 
         public FormMain()
         {
@@ -27,7 +30,7 @@ namespace ImageRetrieval
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-
+            myImages = new List<MyImage>();
         }
 
         /** Tab 1: Training **/
@@ -35,11 +38,14 @@ namespace ImageRetrieval
         private void buttonLoadDataset_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog openFolder = new FolderBrowserDialog();
+            openFolder.SelectedPath = Directory.GetCurrentDirectory();
             if (openFolder.ShowDialog() == DialogResult.OK)
             {
                 datasetFolder = openFolder.SelectedPath;
                 labelLoadDataset.Text = "Load dataset from: " + datasetFolder;
             }
+
+            File.WriteAllText(defaultFileName, datasetFolder + '\n');
         }
 
         private void buttonLoadImgList_Click(object sender, EventArgs e)
@@ -58,6 +64,8 @@ namespace ImageRetrieval
                 string listStr = String.Join("\n", imgNames);
                 labelShowImgList.Text = listStr;
             }
+
+            File.AppendAllText(defaultFileName, openFile.FileName + '\n');
         }
 
         private void buttonLoadQueryList_Click(object sender, EventArgs e)
@@ -76,18 +84,74 @@ namespace ImageRetrieval
                 string listStr = String.Join("\n", queryNames);
                 labelShowQueryList.Text = listStr;
             }
+
+            File.AppendAllText(defaultFileName, openFile.FileName + '\n');
         }
 
         private void buttonQuickStart_Click(object sender, EventArgs e)
         {
+            // Use default settings
+            if (File.Exists(defaultFileName))
+            {
+                string[] fileNames = File.ReadAllLines(defaultFileName);
 
+                if (fileNames.Length >= 3)
+                {
+                    // Button 1
+                    datasetFolder = fileNames[0];
+                    labelLoadDataset.Text = "Load dataset from: " + datasetFolder;
+
+                    // Button 2
+                    imgNames = File.ReadAllLines(fileNames[1]);
+                    labelLoadImgList.Text = "Load image list from: " + fileNames[1];
+
+                    string listStr = String.Join("\n", imgNames);
+                    labelShowImgList.Text = listStr;
+
+                    // Button 3
+                    queryNames = File.ReadAllLines(fileNames[2]);
+                    labelLoadQueryList.Text = "Load image list from: " + fileNames[2];
+
+                    listStr = String.Join("\n", queryNames);
+                    labelShowQueryList.Text = listStr;
+                }
+                else
+                {
+                    MessageBox.Show("Wrong Format");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Default setting not found.");
+            }
         }
 
         /** Tab 2: Testing **/
 
         private void buttonPreProcess_Click(object sender, EventArgs e)
         {
+            for (var i = 0; i < imgNames.Length; ++i)
+            {
+                if (imgNames[i].Length > 1)
+                {
+                    string[] imgNameParam = imgNames[i].Split(' ');
+                    if (imgNameParam.Length == 3)
+                    {
+                        string imgName = imgNameParam[0];
+                        int width = Convert.ToInt32(imgNameParam[1]);
+                        int height = Convert.ToInt32(imgNameParam[2]);
 
+                        string fullFileName = datasetFolder + '\\' + imgName.Replace('/', '\\');
+                        //Console.WriteLine(fullFileName + "   " + width + "   " + height);
+
+                        myImages.Add(new MyImage(fullFileName, imgName, width, height));
+                    }
+                }
+            }
+
+            labelTestResult.Text = "Pre-Process finished.";
+            pictureBoxShowImg.Image = myImages[0].image.ToBitmap();
+            Console.WriteLine("Load " + myImages.Count + " images.");
         }
 
         private void buttonTest_Click(object sender, EventArgs e)
