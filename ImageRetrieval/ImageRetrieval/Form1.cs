@@ -23,6 +23,10 @@ namespace ImageRetrieval
 
         List<MyImage>   myImages;
 
+        int             colorPartB, colorPartG, colorPartR;
+        int             returnImgNum;
+        int             currTextIndex;
+
         public FormMain()
         {
             InitializeComponent();
@@ -156,7 +160,29 @@ namespace ImageRetrieval
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
+            // Check parameters
+            try
+            {
+                colorPartB = Convert.ToInt32(textBoxColorB.Text);
+                colorPartG = Convert.ToInt32(textBoxColorG.Text);
+                colorPartR = Convert.ToInt32(textBoxColorR.Text);
 
+                returnImgNum = Convert.ToInt32(textBoxReturnImgNum.Text);
+
+                currTextIndex = Convert.ToInt32(textBoxTestNum.Text);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Source);
+                MessageBox.Show("Please input NUMBERS in the text box.");
+                return ;
+            }
+
+            string selected = comboBoxMetrics.GetItemText(comboBoxMetrics.SelectedItem);
+            if (selected.Length > 0)
+            {
+                MessageBox.Show(selected);
+            }
         }
 
         private void buttonTestBackward_Click(object sender, EventArgs e)
