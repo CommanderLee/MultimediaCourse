@@ -134,6 +134,21 @@ namespace ImageRetrieval
 
         private void buttonPreProcess_Click(object sender, EventArgs e)
         {
+            // Check parameters
+            try
+            {
+                colorPartB = Convert.ToInt32(textBoxColorB.Text);
+                colorPartG = Convert.ToInt32(textBoxColorG.Text);
+                colorPartR = Convert.ToInt32(textBoxColorR.Text);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Source);
+                MessageBox.Show("Please input NUMBERS in the text box.");
+                return;
+            }
+
+            // Load images
             for (var i = 0; i < imgNames.Length; ++i)
             {
                 if (imgNames[i].Length > 1)
@@ -148,7 +163,9 @@ namespace ImageRetrieval
                         string fullFileName = datasetFolder + '\\' + imgName.Replace('/', '\\');
                         //Console.WriteLine(fullFileName + "   " + width + "   " + height);
 
-                        myImages.Add(new MyImage(fullFileName, imgName, width, height));
+                        MyImage myImage = new MyImage(fullFileName, imgName, width, height);
+                        myImage.hash(colorPartB, colorPartG, colorPartR);
+                        myImages.Add(myImage);
                     }
                 }
             }
@@ -163,10 +180,6 @@ namespace ImageRetrieval
             // Check parameters
             try
             {
-                colorPartB = Convert.ToInt32(textBoxColorB.Text);
-                colorPartG = Convert.ToInt32(textBoxColorG.Text);
-                colorPartR = Convert.ToInt32(textBoxColorR.Text);
-
                 returnImgNum = Convert.ToInt32(textBoxReturnImgNum.Text);
 
                 currTextIndex = Convert.ToInt32(textBoxTestNum.Text);
@@ -181,7 +194,9 @@ namespace ImageRetrieval
             string selected = comboBoxMetrics.GetItemText(comboBoxMetrics.SelectedItem);
             if (selected.Length > 0)
             {
-                MessageBox.Show(selected);
+                //MessageBox.Show(selected);
+                // Start Testing
+
             }
         }
 

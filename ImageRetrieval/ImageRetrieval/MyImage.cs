@@ -13,7 +13,7 @@ namespace ImageRetrieval
     {
         string                  fullFileName, imgName;
         public Image<Bgr, byte> image;
-        int                 width, height;
+        int                     width, height;
 
         public MyImage (string fName, string iName, int _width, int _height)
         {
@@ -28,5 +28,9 @@ namespace ImageRetrieval
             //Console.WriteLine("Load Image: " + imgName);
         }
 
+        public void hash(int colorB, int colorG, int colorR)
+        {
+
+        }
     }
 }

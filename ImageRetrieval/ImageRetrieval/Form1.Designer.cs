@@ -50,6 +50,7 @@
             this.panelShowImg = new System.Windows.Forms.Panel();
             this.pictureBoxShowImg = new System.Windows.Forms.PictureBox();
             this.panelTestButtons = new System.Windows.Forms.Panel();
+            this.comboBoxMetrics = new System.Windows.Forms.ComboBox();
             this.labelMetrics = new System.Windows.Forms.Label();
             this.textBoxColorB = new System.Windows.Forms.TextBox();
             this.textBoxColorG = new System.Windows.Forms.TextBox();
@@ -67,7 +68,6 @@
             this.textBoxReturnImgNum = new System.Windows.Forms.TextBox();
             this.labelReturnImgNum = new System.Windows.Forms.Label();
             this.buttonPreProcess = new System.Windows.Forms.Button();
-            this.comboBoxMetrics = new System.Windows.Forms.ComboBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageTraining.SuspendLayout();
             this.panelTrainOther.SuspendLayout();
@@ -342,6 +342,19 @@
             this.panelTestButtons.Size = new System.Drawing.Size(375, 770);
             this.panelTestButtons.TabIndex = 1;
             // 
+            // comboBoxMetrics
+            // 
+            this.comboBoxMetrics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMetrics.FormattingEnabled = true;
+            this.comboBoxMetrics.Items.AddRange(new object[] {
+            "Euclidean (L2)",
+            "Histogram Intersection (HI)",
+            "Bhattacharyya (Bh)"});
+            this.comboBoxMetrics.Location = new System.Drawing.Point(150, 299);
+            this.comboBoxMetrics.Name = "comboBoxMetrics";
+            this.comboBoxMetrics.Size = new System.Drawing.Size(200, 33);
+            this.comboBoxMetrics.TabIndex = 17;
+            // 
             // labelMetrics
             // 
             this.labelMetrics.BackColor = System.Drawing.Color.Lavender;
@@ -356,7 +369,7 @@
             // 
             // textBoxColorB
             // 
-            this.textBoxColorB.Location = new System.Drawing.Point(325, 230);
+            this.textBoxColorB.Location = new System.Drawing.Point(325, 20);
             this.textBoxColorB.Name = "textBoxColorB";
             this.textBoxColorB.Size = new System.Drawing.Size(30, 30);
             this.textBoxColorB.TabIndex = 15;
@@ -365,7 +378,7 @@
             // 
             // textBoxColorG
             // 
-            this.textBoxColorG.Location = new System.Drawing.Point(275, 230);
+            this.textBoxColorG.Location = new System.Drawing.Point(275, 20);
             this.textBoxColorG.Name = "textBoxColorG";
             this.textBoxColorG.Size = new System.Drawing.Size(30, 30);
             this.textBoxColorG.TabIndex = 14;
@@ -374,7 +387,7 @@
             // 
             // textBoxColorR
             // 
-            this.textBoxColorR.Location = new System.Drawing.Point(225, 230);
+            this.textBoxColorR.Location = new System.Drawing.Point(225, 20);
             this.textBoxColorR.Name = "textBoxColorR";
             this.textBoxColorR.Size = new System.Drawing.Size(30, 30);
             this.textBoxColorR.TabIndex = 13;
@@ -386,7 +399,7 @@
             this.labelColorSpace.BackColor = System.Drawing.Color.Lavender;
             this.labelColorSpace.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelColorSpace.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelColorSpace.Location = new System.Drawing.Point(10, 220);
+            this.labelColorSpace.Location = new System.Drawing.Point(10, 10);
             this.labelColorSpace.Name = "labelColorSpace";
             this.labelColorSpace.Size = new System.Drawing.Size(350, 50);
             this.labelColorSpace.TabIndex = 12;
@@ -399,7 +412,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTestNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxTestNum.Location = new System.Drawing.Point(230, 159);
+            this.textBoxTestNum.Location = new System.Drawing.Point(230, 229);
             this.textBoxTestNum.Name = "textBoxTestNum";
             this.textBoxTestNum.Size = new System.Drawing.Size(80, 35);
             this.textBoxTestNum.TabIndex = 11;
@@ -411,7 +424,7 @@
             this.buttonTestForward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonTestForward.BackgroundImage")));
             this.buttonTestForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonTestForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonTestForward.Location = new System.Drawing.Point(310, 150);
+            this.buttonTestForward.Location = new System.Drawing.Point(310, 220);
             this.buttonTestForward.Name = "buttonTestForward";
             this.buttonTestForward.Size = new System.Drawing.Size(50, 50);
             this.buttonTestForward.TabIndex = 10;
@@ -424,7 +437,7 @@
             this.buttonTestBackward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonTestBackward.BackgroundImage")));
             this.buttonTestBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonTestBackward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonTestBackward.Location = new System.Drawing.Point(10, 150);
+            this.buttonTestBackward.Location = new System.Drawing.Point(10, 220);
             this.buttonTestBackward.Name = "buttonTestBackward";
             this.buttonTestBackward.Size = new System.Drawing.Size(50, 50);
             this.buttonTestBackward.TabIndex = 9;
@@ -495,7 +508,7 @@
             // 
             this.buttonTest.BackColor = System.Drawing.Color.LightCyan;
             this.buttonTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonTest.Location = new System.Drawing.Point(60, 150);
+            this.buttonTest.Location = new System.Drawing.Point(60, 220);
             this.buttonTest.Name = "buttonTest";
             this.buttonTest.Size = new System.Drawing.Size(170, 50);
             this.buttonTest.TabIndex = 3;
@@ -506,7 +519,7 @@
             // 
             // textBoxReturnImgNum
             // 
-            this.textBoxReturnImgNum.Location = new System.Drawing.Point(103, 86);
+            this.textBoxReturnImgNum.Location = new System.Drawing.Point(103, 156);
             this.textBoxReturnImgNum.Name = "textBoxReturnImgNum";
             this.textBoxReturnImgNum.Size = new System.Drawing.Size(100, 30);
             this.textBoxReturnImgNum.TabIndex = 2;
@@ -518,7 +531,7 @@
             this.labelReturnImgNum.BackColor = System.Drawing.Color.Lavender;
             this.labelReturnImgNum.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelReturnImgNum.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReturnImgNum.Location = new System.Drawing.Point(10, 80);
+            this.labelReturnImgNum.Location = new System.Drawing.Point(10, 150);
             this.labelReturnImgNum.Name = "labelReturnImgNum";
             this.labelReturnImgNum.Size = new System.Drawing.Size(350, 50);
             this.labelReturnImgNum.TabIndex = 1;
@@ -528,26 +541,13 @@
             // 
             this.buttonPreProcess.BackColor = System.Drawing.Color.LightCyan;
             this.buttonPreProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonPreProcess.Location = new System.Drawing.Point(10, 10);
+            this.buttonPreProcess.Location = new System.Drawing.Point(10, 80);
             this.buttonPreProcess.Name = "buttonPreProcess";
             this.buttonPreProcess.Size = new System.Drawing.Size(350, 50);
             this.buttonPreProcess.TabIndex = 0;
             this.buttonPreProcess.Text = "Pre-Process";
             this.buttonPreProcess.UseVisualStyleBackColor = false;
             this.buttonPreProcess.Click += new System.EventHandler(this.buttonPreProcess_Click);
-            // 
-            // comboBoxMetrics
-            // 
-            this.comboBoxMetrics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMetrics.FormattingEnabled = true;
-            this.comboBoxMetrics.Items.AddRange(new object[] {
-            "Euclidean (L2)",
-            "Histogram Intersection (HI)",
-            "Bhattacharyya (Bh)"});
-            this.comboBoxMetrics.Location = new System.Drawing.Point(150, 299);
-            this.comboBoxMetrics.Name = "comboBoxMetrics";
-            this.comboBoxMetrics.Size = new System.Drawing.Size(200, 33);
-            this.comboBoxMetrics.TabIndex = 17;
             // 
             // FormMain
             // 
