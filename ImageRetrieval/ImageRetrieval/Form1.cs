@@ -27,6 +27,8 @@ namespace ImageRetrieval
         int             returnImgNum;
         int             currTextIndex;
 
+        DistanceMetrics currMetrics;
+
         public FormMain()
         {
             InitializeComponent();
@@ -192,12 +194,26 @@ namespace ImageRetrieval
             }
 
             string selected = comboBoxMetrics.GetItemText(comboBoxMetrics.SelectedItem);
-            if (selected.Length > 0)
+            if (selected == "Euclidean (L2)")
             {
-                //MessageBox.Show(selected);
-                // Start Testing
-
+                currMetrics = DistanceMetrics.L2
             }
+            else if (selected == "Histogram Intersection (HI)")
+            {
+                currMetrics = DistanceMetrics.HI;
+            }
+            else if (selected == "Bhattacharyya (Bh)")
+            {
+                currMetrics = DistanceMetrics.Bh;
+            }
+            else
+            {
+                Console.WriteLine("Please select a distance metric");
+                return;
+            }
+
+            // Start testing
+
         }
 
         private void buttonTestBackward_Click(object sender, EventArgs e)
