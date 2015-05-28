@@ -50,6 +50,8 @@
             this.panelShowImg = new System.Windows.Forms.Panel();
             this.pictureBoxShowImg = new System.Windows.Forms.PictureBox();
             this.panelTestButtons = new System.Windows.Forms.Panel();
+            this.panelTestResult = new System.Windows.Forms.Panel();
+            this.labelTestResult = new System.Windows.Forms.Label();
             this.comboBoxMetrics = new System.Windows.Forms.ComboBox();
             this.labelMetrics = new System.Windows.Forms.Label();
             this.textBoxColorB = new System.Windows.Forms.TextBox();
@@ -63,7 +65,6 @@
             this.buttonImgBackward = new System.Windows.Forms.Button();
             this.buttonOriginalImg = new System.Windows.Forms.Button();
             this.buttonThumbnailImg = new System.Windows.Forms.Button();
-            this.labelTestResult = new System.Windows.Forms.Label();
             this.buttonTest = new System.Windows.Forms.Button();
             this.textBoxReturnImgNum = new System.Windows.Forms.TextBox();
             this.labelReturnImgNum = new System.Windows.Forms.Label();
@@ -80,6 +81,7 @@
             this.panelShowImg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShowImg)).BeginInit();
             this.panelTestButtons.SuspendLayout();
+            this.panelTestResult.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -318,6 +320,7 @@
             // 
             this.panelTestButtons.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panelTestButtons.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelTestButtons.Controls.Add(this.panelTestResult);
             this.panelTestButtons.Controls.Add(this.comboBoxMetrics);
             this.panelTestButtons.Controls.Add(this.labelMetrics);
             this.panelTestButtons.Controls.Add(this.textBoxColorB);
@@ -331,7 +334,6 @@
             this.panelTestButtons.Controls.Add(this.buttonImgBackward);
             this.panelTestButtons.Controls.Add(this.buttonOriginalImg);
             this.panelTestButtons.Controls.Add(this.buttonThumbnailImg);
-            this.panelTestButtons.Controls.Add(this.labelTestResult);
             this.panelTestButtons.Controls.Add(this.buttonTest);
             this.panelTestButtons.Controls.Add(this.textBoxReturnImgNum);
             this.panelTestButtons.Controls.Add(this.labelReturnImgNum);
@@ -341,6 +343,27 @@
             this.panelTestButtons.Name = "panelTestButtons";
             this.panelTestButtons.Size = new System.Drawing.Size(375, 770);
             this.panelTestButtons.TabIndex = 1;
+            // 
+            // panelTestResult
+            // 
+            this.panelTestResult.AutoScroll = true;
+            this.panelTestResult.Controls.Add(this.labelTestResult);
+            this.panelTestResult.Location = new System.Drawing.Point(10, 360);
+            this.panelTestResult.Name = "panelTestResult";
+            this.panelTestResult.Size = new System.Drawing.Size(350, 150);
+            this.panelTestResult.TabIndex = 18;
+            // 
+            // labelTestResult
+            // 
+            this.labelTestResult.AutoSize = true;
+            this.labelTestResult.BackColor = System.Drawing.Color.Lavender;
+            this.labelTestResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelTestResult.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTestResult.Location = new System.Drawing.Point(0, 0);
+            this.labelTestResult.MinimumSize = new System.Drawing.Size(350, 150);
+            this.labelTestResult.Name = "labelTestResult";
+            this.labelTestResult.Size = new System.Drawing.Size(350, 150);
+            this.labelTestResult.TabIndex = 4;
             // 
             // comboBoxMetrics
             // 
@@ -412,11 +435,11 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTestNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxTestNum.Location = new System.Drawing.Point(230, 229);
+            this.textBoxTestNum.Location = new System.Drawing.Point(166, 228);
             this.textBoxTestNum.Name = "textBoxTestNum";
-            this.textBoxTestNum.Size = new System.Drawing.Size(80, 35);
+            this.textBoxTestNum.Size = new System.Drawing.Size(60, 35);
             this.textBoxTestNum.TabIndex = 11;
-            this.textBoxTestNum.Text = "1";
+            this.textBoxTestNum.Text = "0";
             // 
             // buttonTestForward
             // 
@@ -494,26 +517,16 @@
             this.buttonThumbnailImg.UseVisualStyleBackColor = false;
             this.buttonThumbnailImg.Click += new System.EventHandler(this.buttonThumbnail_Click);
             // 
-            // labelTestResult
-            // 
-            this.labelTestResult.BackColor = System.Drawing.Color.Lavender;
-            this.labelTestResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelTestResult.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTestResult.Location = new System.Drawing.Point(10, 360);
-            this.labelTestResult.Name = "labelTestResult";
-            this.labelTestResult.Size = new System.Drawing.Size(350, 150);
-            this.labelTestResult.TabIndex = 4;
-            // 
             // buttonTest
             // 
             this.buttonTest.BackColor = System.Drawing.Color.LightCyan;
             this.buttonTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.buttonTest.Location = new System.Drawing.Point(60, 220);
             this.buttonTest.Name = "buttonTest";
-            this.buttonTest.Size = new System.Drawing.Size(170, 50);
+            this.buttonTest.Size = new System.Drawing.Size(250, 50);
             this.buttonTest.TabIndex = 3;
-            this.buttonTest.Text = "Test No.";
-            this.buttonTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonTest.Text = "Test No.             ";
+            this.buttonTest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonTest.UseVisualStyleBackColor = false;
             this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
@@ -575,6 +588,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShowImg)).EndInit();
             this.panelTestButtons.ResumeLayout(false);
             this.panelTestButtons.PerformLayout();
+            this.panelTestResult.ResumeLayout(false);
+            this.panelTestResult.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -620,6 +635,7 @@
         private System.Windows.Forms.TextBox textBoxColorB;
         private System.Windows.Forms.Label labelMetrics;
         private System.Windows.Forms.ComboBox comboBoxMetrics;
+        private System.Windows.Forms.Panel panelTestResult;
     }
 }
 

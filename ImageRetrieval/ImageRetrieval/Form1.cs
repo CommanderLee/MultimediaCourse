@@ -25,9 +25,13 @@ namespace ImageRetrieval
 
         int             colorPartB, colorPartG, colorPartR;
         int             returnImgNum;
-        int             currTextIndex;
+        const string    textBtnTestPrefix = "Test No.             ";
+        int             currTestIndex;
 
-        DistanceMetrics currMetrics;
+        DistanceMetrics currMetric;
+
+        List<KeyValuePair<MyImage, double>> resultPair;
+        double          currMaxDist = -1;
 
         public FormMain()
         {
@@ -36,7 +40,11 @@ namespace ImageRetrieval
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            comboBoxMetrics.SelectedIndex = 0;
+
             myImages = new List<MyImage>();
+
+            resultPair = new List<KeyValuePair<MyImage, double>>();
         }
 
         /** Tab 1: Training **/
@@ -151,16 +159,22 @@ namespace ImageRetrieval
             }
 
             // Load images
-            for (var i = 0; i < imgNames.Length; ++i)
+            List<string> validImgNames, validQueryNames;
+            validImgNames = new List<string>();
+            validQueryNames = new List<string>();
+
+            foreach (string imgNameStr in imgNames)
             {
-                if (imgNames[i].Length > 1)
+                if (imgNameStr.Length > 1)
                 {
-                    string[] imgNameParam = imgNames[i].Split(' ');
+                    string[] imgNameParam = imgNameStr.Split(' ');
                     if (imgNameParam.Length == 3)
                     {
                         string imgName = imgNameParam[0];
                         int width = Convert.ToInt32(imgNameParam[1]);
                         int height = Convert.ToInt32(imgNameParam[2]);
+
+                        validImgNames.Add(imgName);
 
                         string fullFileName = datasetFolder + '\\' + imgName.Replace('/', '\\');
                         //Console.WriteLine(fullFileName + "   " + width + "   " + height);
@@ -171,10 +185,84 @@ namespace ImageRetrieval
                     }
                 }
             }
+            imgNames = validImgNames.ToArray();
 
+            foreach (string queryNameStr in queryNames)
+            {
+                if (queryNameStr.Length > 1)
+                {
+                    string[] queryNameParam = queryNameStr.Split(' ');
+                    if (queryNameParam.Length == 3)
+                    {
+                        validQueryNames.Add(queryNameParam[0]);
+                    }
+                }
+            }
+            queryNames = validQueryNames.ToArray();
+            buttonTest.Text = textBtnTestPrefix + "/" + queryNames.Length;
+            
             labelTestResult.Text = "Pre-Process finished.";
             pictureBoxShowImg.Image = myImages[0].image.ToBitmap();
             Console.WriteLine("Load " + myImages.Count + " images.");
+        }
+
+        private MyImage findImage(string imgName)
+        {
+            MyImage resultImg = null;
+            foreach (MyImage myImage in myImages)
+            {
+                if (myImage.isEqual(imgName))
+                {
+                    resultImg = myImage;
+                }
+            }
+            return resultImg;
+        }
+
+        private void addToList(MyImage myImage, double dist)
+        {
+            if (resultPair.Count < returnImgNum)
+            {
+                // Not enough
+                resultPair.Add(new KeyValuePair<MyImage, double>(myImage, dist));
+                if (dist > currMaxDist)
+                    currMaxDist = dist;
+            }
+            else if (dist < currMaxDist)
+            {
+                KeyValuePair<MyImage, double> removePair = new KeyValuePair<MyImage, double>();
+                bool removed = false;
+                currMaxDist = dist;
+                // Remove the currMaxDist, and add this image
+                foreach (KeyValuePair<MyImage, double> pair in resultPair)
+                {
+                    if (pair.Value >= currMaxDist && removed == false)
+                    {
+                        //resultPair.Remove(pair);
+                        removePair = pair;
+                        removed = true;
+                    }
+                    else if (pair.Value > currMaxDist)
+                    {
+                        currMaxDist = pair.Value;
+                    }
+                }
+
+                if (removed)
+                {
+                    resultPair.Remove(removePair);
+                    resultPair.Add(new KeyValuePair<MyImage,double>(myImage, dist));
+                }
+                else
+                {
+                    Console.WriteLine("Error: Remove pair not found.");
+                }
+            }
+        }
+
+        private static int MyCompare(KeyValuePair<MyImage, double> kvp1, KeyValuePair<MyImage, double> kvp2)
+        {
+            return kvp1.Value.CompareTo(kvp2.Value);
         }
 
         private void buttonTest_Click(object sender, EventArgs e)
@@ -184,7 +272,7 @@ namespace ImageRetrieval
             {
                 returnImgNum = Convert.ToInt32(textBoxReturnImgNum.Text);
 
-                currTextIndex = Convert.ToInt32(textBoxTestNum.Text);
+                currTestIndex = Convert.ToInt32(textBoxTestNum.Text);
             }
             catch (Exception exception)
             {
@@ -196,15 +284,15 @@ namespace ImageRetrieval
             string selected = comboBoxMetrics.GetItemText(comboBoxMetrics.SelectedItem);
             if (selected == "Euclidean (L2)")
             {
-                currMetrics = DistanceMetrics.L2
+                currMetric = DistanceMetrics.L2;
             }
             else if (selected == "Histogram Intersection (HI)")
             {
-                currMetrics = DistanceMetrics.HI;
+                currMetric = DistanceMetrics.HI;
             }
             else if (selected == "Bhattacharyya (Bh)")
             {
-                currMetrics = DistanceMetrics.Bh;
+                currMetric = DistanceMetrics.Bh;
             }
             else
             {
@@ -212,18 +300,68 @@ namespace ImageRetrieval
                 return;
             }
 
-            // Start testing
+            //foreach (string queryStr in queryNames)
+            //{
+            //    string[] queryStrParam = queryStr.Split(' ');
+            //    if (queryStrParam.Length == 3)
+            //    {
+                    //string queryName = queryStrParam[0];
+            if (currTestIndex >= 0 && currTestIndex < queryNames.Length)
+            {
+                // Start testing
+                //Console.WriteLine("Start testing. No." + textBoxTestNum);
+                resultPair.Clear();
 
+                string queryName = queryNames[currTestIndex];
+                MyImage queryImg = findImage(queryName);
+                if (queryImg != null)
+                {
+                    pictureBoxShowImg.Image = queryImg.image.ToBitmap();
+
+                    // Calculate distance
+                    foreach (MyImage myImage in myImages)
+                    {
+                        double distance = queryImg.getDistance(myImage, currMetric);
+                        addToList(myImage, distance);
+                    }
+
+                    // Sort
+                    resultPair.Sort(MyCompare);
+                    string resultStr = "";
+                    foreach (KeyValuePair<MyImage, double> pair in resultPair)
+                        resultStr += pair.Key.getImgName() + " " + pair.Value + "\n";
+                    labelTestResult.Text = resultStr;
+                }
+                else
+                {
+                    Console.WriteLine("Error: query image not found. (" + queryName + ")");
+                }
+                //}
+                Console.WriteLine("Done. No." + textBoxTestNum);
+                //break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid TestNo.");
+            }
         }
 
         private void buttonTestBackward_Click(object sender, EventArgs e)
         {
-
+            if (currTestIndex > 0)
+            {
+                --currTestIndex;
+                textBoxTestNum.Text = currTestIndex.ToString();
+            }
         }
 
         private void buttonTestForward_Click(object sender, EventArgs e)
         {
-
+            if (currTestIndex < queryNames.Length)
+            {
+                ++currTestIndex;
+                textBoxTestNum.Text = currTestIndex.ToString();
+            }
         }
 
         private void buttonThumbnail_Click(object sender, EventArgs e)

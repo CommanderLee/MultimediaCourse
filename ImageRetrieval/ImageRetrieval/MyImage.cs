@@ -66,11 +66,14 @@ namespace ImageRetrieval
             Console.WriteLine(". ");
         }
 
-        public double getDistance(int[] hashValue2, DistanceMetrics currMetric)
+        public double getDistance(MyImage image2, DistanceMetrics currMetric)
         {
+            int[] hashValue2 = image2.hashValue;
             if (hashValue.Length != hashValue2.Length)
             {
                 Console.WriteLine("Error. Hash Value Vector does not match.");
+                Console.WriteLine(hashValue.Length + " v.s. " + hashValue2.Length);
+                
                 return -1;
             }
 
@@ -116,6 +119,21 @@ namespace ImageRetrieval
 
             }
             return distance;
+        }
+
+        public bool isEqual(string _imgName)
+        {
+            return imgName == _imgName;
+        }
+
+        public bool isEqual(MyImage _myImage)
+        {
+            return imgName == _myImage.imgName;
+        }
+
+        public string getImgName()
+        {
+            return imgName;
         }
     }
 }
