@@ -69,6 +69,7 @@
             this.textBoxReturnImgNum = new System.Windows.Forms.TextBox();
             this.labelReturnImgNum = new System.Windows.Forms.Label();
             this.buttonPreProcess = new System.Windows.Forms.Button();
+            this.buttonShowResult = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageTraining.SuspendLayout();
             this.panelTrainOther.SuspendLayout();
@@ -320,6 +321,7 @@
             // 
             this.panelTestButtons.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panelTestButtons.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelTestButtons.Controls.Add(this.buttonShowResult);
             this.panelTestButtons.Controls.Add(this.panelTestResult);
             this.panelTestButtons.Controls.Add(this.comboBoxMetrics);
             this.panelTestButtons.Controls.Add(this.labelMetrics);
@@ -348,7 +350,7 @@
             // 
             this.panelTestResult.AutoScroll = true;
             this.panelTestResult.Controls.Add(this.labelTestResult);
-            this.panelTestResult.Location = new System.Drawing.Point(10, 360);
+            this.panelTestResult.Location = new System.Drawing.Point(10, 430);
             this.panelTestResult.Name = "panelTestResult";
             this.panelTestResult.Size = new System.Drawing.Size(350, 150);
             this.panelTestResult.TabIndex = 18;
@@ -373,7 +375,7 @@
             "Euclidean (L2)",
             "Histogram Intersection (HI)",
             "Bhattacharyya (Bh)"});
-            this.comboBoxMetrics.Location = new System.Drawing.Point(150, 299);
+            this.comboBoxMetrics.Location = new System.Drawing.Point(150, 89);
             this.comboBoxMetrics.Name = "comboBoxMetrics";
             this.comboBoxMetrics.Size = new System.Drawing.Size(200, 33);
             this.comboBoxMetrics.TabIndex = 17;
@@ -383,7 +385,7 @@
             this.labelMetrics.BackColor = System.Drawing.Color.Lavender;
             this.labelMetrics.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelMetrics.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMetrics.Location = new System.Drawing.Point(10, 290);
+            this.labelMetrics.Location = new System.Drawing.Point(10, 80);
             this.labelMetrics.Name = "labelMetrics";
             this.labelMetrics.Size = new System.Drawing.Size(350, 50);
             this.labelMetrics.TabIndex = 16;
@@ -435,7 +437,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTestNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxTestNum.Location = new System.Drawing.Point(166, 228);
+            this.textBoxTestNum.Location = new System.Drawing.Point(166, 298);
             this.textBoxTestNum.Name = "textBoxTestNum";
             this.textBoxTestNum.Size = new System.Drawing.Size(60, 35);
             this.textBoxTestNum.TabIndex = 11;
@@ -447,7 +449,7 @@
             this.buttonTestForward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonTestForward.BackgroundImage")));
             this.buttonTestForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonTestForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonTestForward.Location = new System.Drawing.Point(310, 220);
+            this.buttonTestForward.Location = new System.Drawing.Point(310, 290);
             this.buttonTestForward.Name = "buttonTestForward";
             this.buttonTestForward.Size = new System.Drawing.Size(50, 50);
             this.buttonTestForward.TabIndex = 10;
@@ -460,7 +462,7 @@
             this.buttonTestBackward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonTestBackward.BackgroundImage")));
             this.buttonTestBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonTestBackward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonTestBackward.Location = new System.Drawing.Point(10, 220);
+            this.buttonTestBackward.Location = new System.Drawing.Point(10, 290);
             this.buttonTestBackward.Name = "buttonTestBackward";
             this.buttonTestBackward.Size = new System.Drawing.Size(50, 50);
             this.buttonTestBackward.TabIndex = 9;
@@ -473,7 +475,7 @@
             this.buttonImgForward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonImgForward.BackgroundImage")));
             this.buttonImgForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonImgForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonImgForward.Location = new System.Drawing.Point(310, 600);
+            this.buttonImgForward.Location = new System.Drawing.Point(310, 670);
             this.buttonImgForward.Name = "buttonImgForward";
             this.buttonImgForward.Size = new System.Drawing.Size(50, 50);
             this.buttonImgForward.TabIndex = 8;
@@ -486,7 +488,7 @@
             this.buttonImgBackward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonImgBackward.BackgroundImage")));
             this.buttonImgBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonImgBackward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonImgBackward.Location = new System.Drawing.Point(10, 600);
+            this.buttonImgBackward.Location = new System.Drawing.Point(10, 670);
             this.buttonImgBackward.Name = "buttonImgBackward";
             this.buttonImgBackward.Size = new System.Drawing.Size(50, 50);
             this.buttonImgBackward.TabIndex = 7;
@@ -497,7 +499,7 @@
             // 
             this.buttonOriginalImg.BackColor = System.Drawing.Color.LightCyan;
             this.buttonOriginalImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonOriginalImg.Location = new System.Drawing.Point(60, 600);
+            this.buttonOriginalImg.Location = new System.Drawing.Point(60, 670);
             this.buttonOriginalImg.Name = "buttonOriginalImg";
             this.buttonOriginalImg.Size = new System.Drawing.Size(250, 50);
             this.buttonOriginalImg.TabIndex = 6;
@@ -509,7 +511,7 @@
             // 
             this.buttonThumbnailImg.BackColor = System.Drawing.Color.LightCyan;
             this.buttonThumbnailImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonThumbnailImg.Location = new System.Drawing.Point(10, 530);
+            this.buttonThumbnailImg.Location = new System.Drawing.Point(10, 600);
             this.buttonThumbnailImg.Name = "buttonThumbnailImg";
             this.buttonThumbnailImg.Size = new System.Drawing.Size(350, 50);
             this.buttonThumbnailImg.TabIndex = 5;
@@ -521,7 +523,7 @@
             // 
             this.buttonTest.BackColor = System.Drawing.Color.LightCyan;
             this.buttonTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonTest.Location = new System.Drawing.Point(60, 220);
+            this.buttonTest.Location = new System.Drawing.Point(60, 290);
             this.buttonTest.Name = "buttonTest";
             this.buttonTest.Size = new System.Drawing.Size(250, 50);
             this.buttonTest.TabIndex = 3;
@@ -554,13 +556,25 @@
             // 
             this.buttonPreProcess.BackColor = System.Drawing.Color.LightCyan;
             this.buttonPreProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonPreProcess.Location = new System.Drawing.Point(10, 80);
+            this.buttonPreProcess.Location = new System.Drawing.Point(10, 220);
             this.buttonPreProcess.Name = "buttonPreProcess";
             this.buttonPreProcess.Size = new System.Drawing.Size(350, 50);
             this.buttonPreProcess.TabIndex = 0;
             this.buttonPreProcess.Text = "Pre-Process";
             this.buttonPreProcess.UseVisualStyleBackColor = false;
             this.buttonPreProcess.Click += new System.EventHandler(this.buttonPreProcess_Click);
+            // 
+            // buttonShowResult
+            // 
+            this.buttonShowResult.BackColor = System.Drawing.Color.LightCyan;
+            this.buttonShowResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonShowResult.Location = new System.Drawing.Point(10, 360);
+            this.buttonShowResult.Name = "buttonShowResult";
+            this.buttonShowResult.Size = new System.Drawing.Size(350, 50);
+            this.buttonShowResult.TabIndex = 19;
+            this.buttonShowResult.Text = "Show Result";
+            this.buttonShowResult.UseVisualStyleBackColor = false;
+            this.buttonShowResult.Click += new System.EventHandler(this.buttonShowResult_Click);
             // 
             // FormMain
             // 
@@ -636,6 +650,7 @@
         private System.Windows.Forms.Label labelMetrics;
         private System.Windows.Forms.ComboBox comboBoxMetrics;
         private System.Windows.Forms.Panel panelTestResult;
+        private System.Windows.Forms.Button buttonShowResult;
     }
 }
 

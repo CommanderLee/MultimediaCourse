@@ -265,85 +265,119 @@ namespace ImageRetrieval
             return kvp1.Value.CompareTo(kvp2.Value);
         }
 
-        private void buttonTest_Click(object sender, EventArgs e)
+        private bool checkTestParam()
         {
+            bool checkResult = true;
             // Check parameters
             try
             {
                 returnImgNum = Convert.ToInt32(textBoxReturnImgNum.Text);
 
-                currTestIndex = Convert.ToInt32(textBoxTestNum.Text);
+                if (textBoxTestNum.Text.ToLower() == "all")
+                    currTestIndex = -1;
+                else
+                    currTestIndex = Convert.ToInt32(textBoxTestNum.Text);
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Source);
                 MessageBox.Show("Please input NUMBERS in the text box.");
-                return ;
+                checkResult = false;
             }
 
-            string selected = comboBoxMetrics.GetItemText(comboBoxMetrics.SelectedItem);
-            if (selected == "Euclidean (L2)")
+            if (checkResult)
             {
-                currMetric = DistanceMetrics.L2;
-            }
-            else if (selected == "Histogram Intersection (HI)")
-            {
-                currMetric = DistanceMetrics.HI;
-            }
-            else if (selected == "Bhattacharyya (Bh)")
-            {
-                currMetric = DistanceMetrics.Bh;
-            }
-            else
-            {
-                Console.WriteLine("Please select a distance metric");
-                return;
-            }
-
-            //foreach (string queryStr in queryNames)
-            //{
-            //    string[] queryStrParam = queryStr.Split(' ');
-            //    if (queryStrParam.Length == 3)
-            //    {
-                    //string queryName = queryStrParam[0];
-            if (currTestIndex >= 0 && currTestIndex < queryNames.Length)
-            {
-                // Start testing
-                //Console.WriteLine("Start testing. No." + textBoxTestNum);
-                resultPair.Clear();
-
-                string queryName = queryNames[currTestIndex];
-                MyImage queryImg = findImage(queryName);
-                if (queryImg != null)
+                string selected = comboBoxMetrics.GetItemText(comboBoxMetrics.SelectedItem);
+                if (selected == "Euclidean (L2)")
                 {
-                    pictureBoxShowImg.Image = queryImg.image.ToBitmap();
-
-                    // Calculate distance
-                    foreach (MyImage myImage in myImages)
-                    {
-                        double distance = queryImg.getDistance(myImage, currMetric);
-                        addToList(myImage, distance);
-                    }
-
-                    // Sort
-                    resultPair.Sort(MyCompare);
-                    string resultStr = "";
-                    foreach (KeyValuePair<MyImage, double> pair in resultPair)
-                        resultStr += pair.Key.getImgName() + " " + pair.Value + "\n";
-                    labelTestResult.Text = resultStr;
+                    currMetric = DistanceMetrics.L2;
+                }
+                else if (selected == "Histogram Intersection (HI)")
+                {
+                    currMetric = DistanceMetrics.HI;
+                }
+                else if (selected == "Bhattacharyya (Bh)")
+                {
+                    currMetric = DistanceMetrics.Bh;
                 }
                 else
                 {
-                    Console.WriteLine("Error: query image not found. (" + queryName + ")");
+                    Console.WriteLine("Please select a distance metric");
+                    checkResult = false;
                 }
-                //}
-                Console.WriteLine("Done. No." + textBoxTestNum);
-                //break;
+            }
+
+            return checkResult;
+        }
+
+        /// <summary>
+        /// Do Image Retrieval Test of 'index'. Assume that the index is valid.
+        /// </summary>
+        /// <param name="index"></param>
+        private void doTest(int index)
+        {
+            // Start testing
+            //Console.WriteLine("Start testing. No." + textBoxTestNum);
+            resultPair.Clear();
+
+            string queryName = queryNames[index];
+            MyImage queryImg = findImage(queryName);
+            if (queryImg != null)
+            {
+                pictureBoxShowImg.Image = queryImg.image.ToBitmap();
+
+                // Calculate distance
+                foreach (MyImage myImage in myImages)
+                {
+                    double distance = queryImg.getDistance(myImage, currMetric);
+                    addToList(myImage, distance);
+                }
+
+                // Sort
+                resultPair.Sort(MyCompare);
+                string resultStr = String.Format("Query: {0}\nResult:\n", queryName) ;
+                foreach (KeyValuePair<MyImage, double> pair in resultPair)
+                    resultStr += pair.Key.getImgName() + " " + pair.Value + "\n";
+                labelTestResult.Text = resultStr;
             }
             else
             {
-                Console.WriteLine("Invalid TestNo.");
+                Console.WriteLine("Error: query image not found. (" + queryName + ")");
             }
+            //}
+            Console.WriteLine("Done. No." + index);
+            //break;
+        }
+
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            if (checkTestParam())
+            {
+                if (currTestIndex == -1)
+                {
+                    // Test all
+                    for (var i = 0; i < queryNames.Length; ++i)
+                    {
+                        doTest(i);
+                    }
+                }
+                else
+                {
+                    if (currTestIndex >= 0 && currTestIndex < queryNames.Length)
+                    {
+                        doTest(currTestIndex);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid TestNo.");
+                    }
+                }
+            }
+        }
+
+        private void buttonShowResult_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void buttonTestBackward_Click(object sender, EventArgs e)
