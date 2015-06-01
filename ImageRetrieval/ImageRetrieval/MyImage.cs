@@ -92,7 +92,13 @@ namespace ImageRetrieval
                     {
                         distance += Math.Min(hashValue[i], hashValue2[i]);
                     }
-                    // TODO: another version
+                    //another version
+                    //double sumDist1 = 0;
+                    //foreach (var hV in hashValue2)
+                    //{
+                    //    sumDist1 += hV;
+                    //}
+                    //distance = distance / sumDist1;
                     break;
                 case DistanceMetrics.Bh:
                     int[] normHashValue = new int[hashValue.Length];

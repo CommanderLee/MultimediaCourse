@@ -31,6 +31,8 @@ namespace ImageRetrieval
         DistanceMetrics currMetric;
 
         List<KeyValuePair<MyImage, double>> resultPair;
+        string          precisionStr;
+        double          overallPrecision;
         double          currMaxDist = -1;
 
         public FormMain()
@@ -310,6 +312,24 @@ namespace ImageRetrieval
             return checkResult;
         }
 
+        private void saveSingleQuery(string queryName, string result)
+        {
+            using (StreamWriter sw = new StreamWriter(String.Format("res_{0}.txt", queryName.Substring(0, queryName.Length - 4).Replace('/', '_'))))
+            {
+                sw.Write(result);
+            }
+        }
+
+        private void saveAllQuery(string result)
+        {
+            using (StreamWriter sw = new StreamWriter("res_overall.txt"))
+            {
+                sw.Write(precisionStr);
+                overallPrecision = overallPrecision / returnImgNum;
+                sw.WriteLine(overallPrecision);
+            }
+        }
+
         /// <summary>
         /// Do Image Retrieval Test of 'index'. Assume that the index is valid.
         /// </summary>
@@ -319,8 +339,11 @@ namespace ImageRetrieval
             // Start testing
             //Console.WriteLine("Start testing. No." + textBoxTestNum);
             resultPair.Clear();
+            string resultStr = "";
+            int matchCnt = 0;
 
             string queryName = queryNames[index];
+            string folderName = queryName.Split('/')[0];
             MyImage queryImg = findImage(queryName);
             if (queryImg != null)
             {
@@ -335,18 +358,28 @@ namespace ImageRetrieval
 
                 // Sort
                 resultPair.Sort(MyCompare);
-                string resultStr = String.Format("Query: {0}\nResult:\n", queryName) ;
+
                 foreach (KeyValuePair<MyImage, double> pair in resultPair)
-                    resultStr += pair.Key.getImgName() + " " + pair.Value + "\n";
-                labelTestResult.Text = resultStr;
+                {
+                    resultStr += pair.Key.getImgName() + " " + pair.Value + "\r\n";
+                    if (folderName == pair.Key.getImgName().Split('/')[0])
+                        ++matchCnt;
+                }
+
+                double precision = (double)(matchCnt) / returnImgNum;
+                overallPrecision += precision;
+                precisionStr += queryName + " " + precision + "\r\n";
+                labelTestResult.Text =  String.Format("Query: {0}\nResult {1}({2}/{3}):\n", queryName, precision, matchCnt, returnImgNum) + resultStr;
             }
             else
             {
                 Console.WriteLine("Error: query image not found. (" + queryName + ")");
             }
-            //}
+            
             Console.WriteLine("Done. No." + index);
-            //break;
+            
+            // Save to file
+            saveSingleQuery(queryName, resultStr);
         }
 
         private void buttonTest_Click(object sender, EventArgs e)
@@ -356,10 +389,13 @@ namespace ImageRetrieval
                 if (currTestIndex == -1)
                 {
                     // Test all
+                    precisionStr = "";
+                    overallPrecision = 0;
                     for (var i = 0; i < queryNames.Length; ++i)
                     {
                         doTest(i);
                     }
+                    saveAllQuery(precisionStr);
                 }
                 else
                 {
@@ -377,7 +413,7 @@ namespace ImageRetrieval
 
         private void buttonShowResult_Click(object sender, EventArgs e)
         {
-
+            labelTestResult.Text = precisionStr + overallPrecision;
         }
 
         private void buttonTestBackward_Click(object sender, EventArgs e)
@@ -391,7 +427,7 @@ namespace ImageRetrieval
 
         private void buttonTestForward_Click(object sender, EventArgs e)
         {
-            if (currTestIndex < queryNames.Length)
+            if (currTestIndex >= 0 && currTestIndex < queryNames.Length)
             {
                 ++currTestIndex;
                 textBoxTestNum.Text = currTestIndex.ToString();
