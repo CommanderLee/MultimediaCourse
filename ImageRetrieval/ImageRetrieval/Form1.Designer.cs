@@ -50,6 +50,7 @@
             this.panelShowImg = new System.Windows.Forms.Panel();
             this.pictureBoxShowImg = new System.Windows.Forms.PictureBox();
             this.panelTestButtons = new System.Windows.Forms.Panel();
+            this.buttonShowResult = new System.Windows.Forms.Button();
             this.panelTestResult = new System.Windows.Forms.Panel();
             this.labelTestResult = new System.Windows.Forms.Label();
             this.comboBoxMetrics = new System.Windows.Forms.ComboBox();
@@ -61,15 +62,10 @@
             this.textBoxTestNum = new System.Windows.Forms.TextBox();
             this.buttonTestForward = new System.Windows.Forms.Button();
             this.buttonTestBackward = new System.Windows.Forms.Button();
-            this.buttonImgForward = new System.Windows.Forms.Button();
-            this.buttonImgBackward = new System.Windows.Forms.Button();
-            this.buttonOriginalImg = new System.Windows.Forms.Button();
-            this.buttonThumbnailImg = new System.Windows.Forms.Button();
             this.buttonTest = new System.Windows.Forms.Button();
             this.textBoxReturnImgNum = new System.Windows.Forms.TextBox();
             this.labelReturnImgNum = new System.Windows.Forms.Label();
             this.buttonPreProcess = new System.Windows.Forms.Button();
-            this.buttonShowResult = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageTraining.SuspendLayout();
             this.panelTrainOther.SuspendLayout();
@@ -332,10 +328,6 @@
             this.panelTestButtons.Controls.Add(this.textBoxTestNum);
             this.panelTestButtons.Controls.Add(this.buttonTestForward);
             this.panelTestButtons.Controls.Add(this.buttonTestBackward);
-            this.panelTestButtons.Controls.Add(this.buttonImgForward);
-            this.panelTestButtons.Controls.Add(this.buttonImgBackward);
-            this.panelTestButtons.Controls.Add(this.buttonOriginalImg);
-            this.panelTestButtons.Controls.Add(this.buttonThumbnailImg);
             this.panelTestButtons.Controls.Add(this.buttonTest);
             this.panelTestButtons.Controls.Add(this.textBoxReturnImgNum);
             this.panelTestButtons.Controls.Add(this.labelReturnImgNum);
@@ -345,6 +337,18 @@
             this.panelTestButtons.Name = "panelTestButtons";
             this.panelTestButtons.Size = new System.Drawing.Size(375, 770);
             this.panelTestButtons.TabIndex = 1;
+            // 
+            // buttonShowResult
+            // 
+            this.buttonShowResult.BackColor = System.Drawing.Color.LightCyan;
+            this.buttonShowResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonShowResult.Location = new System.Drawing.Point(10, 360);
+            this.buttonShowResult.Name = "buttonShowResult";
+            this.buttonShowResult.Size = new System.Drawing.Size(350, 50);
+            this.buttonShowResult.TabIndex = 19;
+            this.buttonShowResult.Text = "Show Result";
+            this.buttonShowResult.UseVisualStyleBackColor = false;
+            this.buttonShowResult.Click += new System.EventHandler(this.buttonShowResult_Click);
             // 
             // panelTestResult
             // 
@@ -374,6 +378,7 @@
             this.comboBoxMetrics.Items.AddRange(new object[] {
             "Euclidean (L2)",
             "Histogram Intersection (HI)",
+            "Histogram Intersection (HI)-2",
             "Bhattacharyya (Bh)"});
             this.comboBoxMetrics.Location = new System.Drawing.Point(150, 89);
             this.comboBoxMetrics.Name = "comboBoxMetrics";
@@ -469,56 +474,6 @@
             this.buttonTestBackward.UseVisualStyleBackColor = false;
             this.buttonTestBackward.Click += new System.EventHandler(this.buttonTestBackward_Click);
             // 
-            // buttonImgForward
-            // 
-            this.buttonImgForward.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.buttonImgForward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonImgForward.BackgroundImage")));
-            this.buttonImgForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonImgForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonImgForward.Location = new System.Drawing.Point(310, 670);
-            this.buttonImgForward.Name = "buttonImgForward";
-            this.buttonImgForward.Size = new System.Drawing.Size(50, 50);
-            this.buttonImgForward.TabIndex = 8;
-            this.buttonImgForward.UseVisualStyleBackColor = false;
-            this.buttonImgForward.Click += new System.EventHandler(this.buttonImgForward_Click);
-            // 
-            // buttonImgBackward
-            // 
-            this.buttonImgBackward.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.buttonImgBackward.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonImgBackward.BackgroundImage")));
-            this.buttonImgBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonImgBackward.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonImgBackward.Location = new System.Drawing.Point(10, 670);
-            this.buttonImgBackward.Name = "buttonImgBackward";
-            this.buttonImgBackward.Size = new System.Drawing.Size(50, 50);
-            this.buttonImgBackward.TabIndex = 7;
-            this.buttonImgBackward.UseVisualStyleBackColor = false;
-            this.buttonImgBackward.Click += new System.EventHandler(this.buttonImgBackward_Click);
-            // 
-            // buttonOriginalImg
-            // 
-            this.buttonOriginalImg.BackColor = System.Drawing.Color.LightCyan;
-            this.buttonOriginalImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonOriginalImg.Location = new System.Drawing.Point(60, 670);
-            this.buttonOriginalImg.Name = "buttonOriginalImg";
-            this.buttonOriginalImg.Size = new System.Drawing.Size(250, 50);
-            this.buttonOriginalImg.TabIndex = 6;
-            this.buttonOriginalImg.Text = "Show Original Image";
-            this.buttonOriginalImg.UseVisualStyleBackColor = false;
-            this.buttonOriginalImg.Click += new System.EventHandler(this.buttonOriginalImg_Click);
-            // 
-            // buttonThumbnailImg
-            // 
-            this.buttonThumbnailImg.BackColor = System.Drawing.Color.LightCyan;
-            this.buttonThumbnailImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonThumbnailImg.Location = new System.Drawing.Point(10, 600);
-            this.buttonThumbnailImg.Name = "buttonThumbnailImg";
-            this.buttonThumbnailImg.Size = new System.Drawing.Size(350, 50);
-            this.buttonThumbnailImg.TabIndex = 5;
-            this.buttonThumbnailImg.Text = "Show Thumbnail Image";
-            this.buttonThumbnailImg.UseVisualStyleBackColor = false;
-            this.buttonThumbnailImg.Click += new System.EventHandler(this.buttonThumbnail_Click);
-            // 
             // buttonTest
             // 
             this.buttonTest.BackColor = System.Drawing.Color.LightCyan;
@@ -563,18 +518,6 @@
             this.buttonPreProcess.Text = "Pre-Process";
             this.buttonPreProcess.UseVisualStyleBackColor = false;
             this.buttonPreProcess.Click += new System.EventHandler(this.buttonPreProcess_Click);
-            // 
-            // buttonShowResult
-            // 
-            this.buttonShowResult.BackColor = System.Drawing.Color.LightCyan;
-            this.buttonShowResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonShowResult.Location = new System.Drawing.Point(10, 360);
-            this.buttonShowResult.Name = "buttonShowResult";
-            this.buttonShowResult.Size = new System.Drawing.Size(350, 50);
-            this.buttonShowResult.TabIndex = 19;
-            this.buttonShowResult.Text = "Show Result";
-            this.buttonShowResult.UseVisualStyleBackColor = false;
-            this.buttonShowResult.Click += new System.EventHandler(this.buttonShowResult_Click);
             // 
             // FormMain
             // 
@@ -636,10 +579,6 @@
         private System.Windows.Forms.Label labelTestResult;
         private System.Windows.Forms.Panel panelShowImg;
         private System.Windows.Forms.PictureBox pictureBoxShowImg;
-        private System.Windows.Forms.Button buttonThumbnailImg;
-        private System.Windows.Forms.Button buttonOriginalImg;
-        private System.Windows.Forms.Button buttonImgBackward;
-        private System.Windows.Forms.Button buttonImgForward;
         private System.Windows.Forms.Button buttonTestBackward;
         private System.Windows.Forms.Button buttonTestForward;
         private System.Windows.Forms.TextBox textBoxTestNum;

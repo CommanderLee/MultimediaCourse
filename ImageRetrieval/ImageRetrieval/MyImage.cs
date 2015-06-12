@@ -10,7 +10,7 @@ using Emgu.CV.Structure;
 namespace ImageRetrieval
 {
     // Euclidean(L2), Histogram Intersection(HI), Bhattacharyya(Bh)
-    enum DistanceMetrics { L2, HI, Bh };
+    enum DistanceMetrics { L2, HI, HI2, Bh };
 
     class MyImage
     {
@@ -92,13 +92,19 @@ namespace ImageRetrieval
                     {
                         distance += Math.Min(hashValue[i], hashValue2[i]);
                     }
+                    break;
+                case DistanceMetrics.HI2:
                     //another version
-                    //double sumDist1 = 0;
-                    //foreach (var hV in hashValue2)
-                    //{
-                    //    sumDist1 += hV;
-                    //}
-                    //distance = distance / sumDist1;
+                    for (var i = 0; i < hashValue.Length; ++i)
+                    {
+                        distance += Math.Min(hashValue[i], hashValue2[i]);
+                    }
+                    double sumDist1 = 0;
+                    foreach (var hV in hashValue2)
+                    {
+                        sumDist1 += hV;
+                    }
+                    distance = distance / sumDist1;
                     break;
                 case DistanceMetrics.Bh:
                     int[] normHashValue = new int[hashValue.Length];

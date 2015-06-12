@@ -160,52 +160,64 @@ namespace ImageRetrieval
                 return;
             }
 
-            // Load images
-            List<string> validImgNames, validQueryNames;
-            validImgNames = new List<string>();
-            validQueryNames = new List<string>();
-
-            foreach (string imgNameStr in imgNames)
+            if (myImages.Count == 0)
             {
-                if (imgNameStr.Length > 1)
+                // Load images
+                List<string> validImgNames, validQueryNames;
+                validImgNames = new List<string>();
+                validQueryNames = new List<string>();
+
+                foreach (string imgNameStr in imgNames)
                 {
-                    string[] imgNameParam = imgNameStr.Split(' ');
-                    if (imgNameParam.Length == 3)
+                    if (imgNameStr.Length > 1)
                     {
-                        string imgName = imgNameParam[0];
-                        int width = Convert.ToInt32(imgNameParam[1]);
-                        int height = Convert.ToInt32(imgNameParam[2]);
+                        string[] imgNameParam = imgNameStr.Split(' ');
+                        if (imgNameParam.Length == 3)
+                        {
+                            string imgName = imgNameParam[0];
+                            int width = Convert.ToInt32(imgNameParam[1]);
+                            int height = Convert.ToInt32(imgNameParam[2]);
 
-                        validImgNames.Add(imgName);
+                            validImgNames.Add(imgName);
 
-                        string fullFileName = datasetFolder + '\\' + imgName.Replace('/', '\\');
-                        //Console.WriteLine(fullFileName + "   " + width + "   " + height);
+                            string fullFileName = datasetFolder + '\\' + imgName.Replace('/', '\\');
+                            //Console.WriteLine(fullFileName + "   " + width + "   " + height);
 
-                        MyImage myImage = new MyImage(fullFileName, imgName, width, height);
-                        myImage.hash(colorPartB, colorPartG, colorPartR);
-                        myImages.Add(myImage);
+                            MyImage myImage = new MyImage(fullFileName, imgName, width, height);
+                            myImage.hash(colorPartB, colorPartG, colorPartR);
+                            myImages.Add(myImage);
+                        }
                     }
                 }
-            }
-            imgNames = validImgNames.ToArray();
+                imgNames = validImgNames.ToArray();
 
-            foreach (string queryNameStr in queryNames)
-            {
-                if (queryNameStr.Length > 1)
+                foreach (string queryNameStr in queryNames)
                 {
-                    string[] queryNameParam = queryNameStr.Split(' ');
-                    if (queryNameParam.Length == 3)
+                    if (queryNameStr.Length > 1)
                     {
-                        validQueryNames.Add(queryNameParam[0]);
+                        string[] queryNameParam = queryNameStr.Split(' ');
+                        if (queryNameParam.Length == 3)
+                        {
+                            validQueryNames.Add(queryNameParam[0]);
+                        }
                     }
                 }
+                queryNames = validQueryNames.ToArray();
+                buttonTest.Text = textBtnTestPrefix + "/" + queryNames.Length;
+
+                labelTestResult.Text = "Pre-Process finished.";
+                pictureBoxShowImg.Image = myImages[0].image.ToBitmap();
+                Console.WriteLine("Load " + myImages.Count + " images.");
             }
-            queryNames = validQueryNames.ToArray();
-            buttonTest.Text = textBtnTestPrefix + "/" + queryNames.Length;
-            
-            labelTestResult.Text = "Pre-Process finished.";
-            pictureBoxShowImg.Image = myImages[0].image.ToBitmap();
-            Console.WriteLine("Load " + myImages.Count + " images.");
+            else
+            {
+                foreach (MyImage mImg in myImages)
+                {
+                    mImg.hash(colorPartB, colorPartG, colorPartR);
+                }
+
+                Console.WriteLine("Re-Hash " + myImages.Count + " images.");
+            }
         }
 
         private MyImage findImage(string imgName)
@@ -232,6 +244,7 @@ namespace ImageRetrieval
             }
             else if (dist < currMaxDist)
             {
+                // Enough img
                 KeyValuePair<MyImage, double> removePair = new KeyValuePair<MyImage, double>();
                 bool removed = false;
                 currMaxDist = dist;
@@ -243,11 +256,12 @@ namespace ImageRetrieval
                         //resultPair.Remove(pair);
                         removePair = pair;
                         removed = true;
+                        break;
                     }
-                    else if (pair.Value > currMaxDist)
-                    {
-                        currMaxDist = pair.Value;
-                    }
+                    //else if (pair.Value > currMaxDist)
+                    //{
+                    //    currMaxDist = pair.Value;
+                    //}
                 }
 
                 if (removed)
@@ -298,6 +312,10 @@ namespace ImageRetrieval
                 {
                     currMetric = DistanceMetrics.HI;
                 }
+                else if (selected == "Histogram Intersection (HI)-2")
+                {
+                    currMetric = DistanceMetrics.HI2;
+                }
                 else if (selected == "Bhattacharyya (Bh)")
                 {
                     currMetric = DistanceMetrics.Bh;
@@ -325,7 +343,7 @@ namespace ImageRetrieval
             using (StreamWriter sw = new StreamWriter("res_overall.txt"))
             {
                 sw.Write(precisionStr);
-                overallPrecision = overallPrecision / returnImgNum;
+                overallPrecision = overallPrecision / queryNames.Length;
                 sw.WriteLine(overallPrecision);
             }
         }
@@ -339,6 +357,7 @@ namespace ImageRetrieval
             // Start testing
             //Console.WriteLine("Start testing. No." + textBoxTestNum);
             resultPair.Clear();
+            currMaxDist = -1;
             string resultStr = "";
             int matchCnt = 0;
 
@@ -363,7 +382,9 @@ namespace ImageRetrieval
                 {
                     resultStr += pair.Key.getImgName() + " " + pair.Value + "\r\n";
                     if (folderName == pair.Key.getImgName().Split('/')[0])
+                    {
                         ++matchCnt;
+                    }
                 }
 
                 double precision = (double)(matchCnt) / returnImgNum;
@@ -432,26 +453,6 @@ namespace ImageRetrieval
                 ++currTestIndex;
                 textBoxTestNum.Text = currTestIndex.ToString();
             }
-        }
-
-        private void buttonThumbnail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonOriginalImg_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonImgBackward_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonImgForward_Click(object sender, EventArgs e)
-        {
-
         }
 
     }
